@@ -93,7 +93,7 @@ spec:
               mountPath: /var/lib/signoz
         {{- end }}
         {{- if .extraContainers }}
-          {{- toYaml .extraContainers | nindent 10 }}
+        {{- toYaml .extraContainers | nindent 10 }}
         {{- end }}
       {{- end }}
       containers:
