@@ -662,6 +662,9 @@ queryService:
       # limits:
       #   cpu: 100m
       #   memory: 100Mi
+    extraContainers: []
+  extraVolumes: []
+  extraVolumeMounts: []
   configVars:
     storage: clickhouse
     # ClickHouse URL is set and applied internally.

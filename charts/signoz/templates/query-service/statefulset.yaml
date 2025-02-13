@@ -92,6 +92,9 @@ spec:
           {{- end }}
               mountPath: /var/lib/signoz
         {{- end }}
+        {{- if .extraContainers }}
+          {{- toYaml .extraContainers | nindent 10 }}
+        {{- end }}
       {{- end }}
       containers:
         - name: query-service
@@ -203,6 +206,9 @@ spec:
             - name: signoz-db-volume
           {{- end }}
               mountPath: /var/lib/signoz/
+          {{- if .Values.queryService.extraVolumeMounts }}
+          {{- toYaml .Values.queryService.extraVolumeMounts | nindent 12 }}
+          {{- end }}
           resources:
             {{- toYaml .Values.queryService.resources | nindent 12 }}
       volumes:
@@ -218,6 +224,9 @@ spec:
         - name: signoz-db-existing-claim
           persistentVolumeClaim:
             claimName: {{ .Values.queryService.persistence.existingClaim }}
+      {{- end }}
+      {{- if .Values.queryService.extraVolumes }}
+      {{- toYaml .Values.queryService.extraVolumes | nindent 8 }}
       {{- end }}
 
 {{- if and (.Values.queryService.persistence.enabled) (not .Values.queryService.persistence.existingClaim) }}
